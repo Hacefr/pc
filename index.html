@@ -17,7 +17,7 @@
             <span>game.exe</span>
         </div>
 
-        <!-- The App Window (Hidden by default) -->
+        <!-- The App Window (Main Game Panel) -->
         <div id="app-window" class="window hidden">
             <div id="window-header" class="window-header">
                 <span class="window-title">game.exe</span>
@@ -25,10 +25,31 @@
             </div>
             <div class="window-content">
                 <h3>Welcome to game.exe</h3>
-                <p>Drag me by my header bar!</p>
+                <p>Keep an eye out for pop-ups!</p>
             </div>
         </div>
 
+        <!-- "Hi!" Pop-up Tab (Hidden by default, spawns via main.js) -->
+        <div id="hi-window" class="window hidden">
+            <div id="hi-header" class="window-header hi-header-color">
+                <span class="window-title">Warning: Hi!</span>
+                <button id="hi-close-btn" class="close-button">X</button>
+            </div>
+            <div class="window-content hi-content-box">
+                <img id="hi-sprite" src="assets/hi_normal.png" alt="Hi Entity">
+                <p id="hi-text">Hi attacks in between 8 seconds! Phase 1 is normal, phase 2 is a warning, phase 3 is attack phase... he will flash his eye at you, consider yourself dead.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Blue Screen of Death / PC Crash Screen -->
+    <div id="crash-screen" class="hidden">
+        <div id="crash-text">
+            <h1>A fatal exception has occurred.</h1>
+            <p>The system sanity has dropped to 0%. game.exe has corrupted the OS.</p>
+            <p>Press any key or click to reboot the desktop...</p>
+        </div>
     </div>
 
     <!-- Main Game Script -->
