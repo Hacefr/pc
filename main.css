@@ -141,3 +141,9 @@ body, html {
     max-width: 600px;
     text-align: left;
 }
+
+/* Simple text flash styling for our initialization warning message */
+@keyframes flash {
+    from { opacity: 1; }
+    to { opacity: 0.2; }
+}
