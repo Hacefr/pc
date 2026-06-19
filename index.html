@@ -17,19 +17,21 @@
             <span>game.exe</span>
         </div>
 
-        <!-- The App Window (Main Game Panel) -->
+        <!-- The App Window (Main Game Panel containing the tutorial warning) -->
         <div id="app-window" class="window hidden">
             <div id="window-header" class="window-header">
                 <span class="window-title">game.exe</span>
                 <button id="close-btn" class="close-button">X</button>
             </div>
             <div class="window-content">
-                <h3>Welcome to game.exe</h3>
-                <p>Keep an eye out for pop-ups!</p>
+                <h3>SYSTEM WARNING</h3>
+                <p>An entity named "Hi!" is attempting to compromise your desktop environment.</p>
+                <p><strong>Rules:</strong> "Hi!" spawns randomly and attacks every 8 seconds. Close its tab before it reaches Phase 3 (Attack), or your system will suffer a fatal crash.</p>
+                <p style="color: #800000; font-weight: bold; margin-top: 15px; animation: flash 1s infinite alternate;">Initialization routine running... stand by.</p>
             </div>
         </div>
 
-        <!-- "Hi!" Pop-up Tab (Bypassed to open instantly for testing) -->
+        <!-- "Hi!" Pop-up Tab (Spawns right after the text finishes initializing) -->
         <div id="hi-window" class="window hidden">
             <div id="hi-header" class="window-header hi-header-color">
                 <span class="window-title">Warning: Hi!</span>
@@ -52,7 +54,7 @@
         </div>
     </div>
 
-    <!-- Temporarily loaded test.js instead of main.js to fix the spawn issue -->
-    <script src="test.js"></script>
+    <!-- Pointing back to main.js now that testing is finished -->
+    <script src="main.js"></script>
 </body>
 </html>
