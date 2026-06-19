@@ -16,10 +16,11 @@ const endSound = new Audio('sounds/end.mp3');
 let gameActive = false;
 let hiTimer = null;
 let hiSeconds = 0;
+let initialSpawnTimeout = null;
 
 // --- OPEN & CLOSE SYSTEM ---
 
-// Open main game window and kick off the challenge loop
+// Open main game window and display system rules text
 gameIcon.addEventListener('dblclick', () => {
     if (!gameActive) {
         appWindow.classList.remove('hidden');
@@ -28,14 +29,21 @@ gameIcon.addEventListener('dblclick', () => {
         appWindow.style.top = (window.innerHeight / 2 - 100) + 'px';
         
         gameActive = true;
-        startHiLoop();
+        
+        // Let player read instructions for 5 seconds before first spawn triggers
+        initialSpawnTimeout = setTimeout(() => {
+            if (gameActive) {
+                spawnHiWindow();
+            }
+        }, 5000);
     }
 });
 
-// Close main window
+// Close main window (Resets everything cleanly back to base desktop state)
 closeBtn.addEventListener('click', () => {
     appWindow.classList.add('hidden');
     stopHiLoop();
+    clearTimeout(initialSpawnTimeout);
     hiWindow.classList.add('hidden');
     gameActive = false;
 });
@@ -49,18 +57,21 @@ hiCloseBtn.addEventListener('click', () => {
 
 // --- "HI!" ENTITY ENGINE (8 SECOND CLOCK) ---
 
-function startHiLoop() {
-    resetHiCycle();
-    // Spawns Hi window at a random desktop spot after 3 seconds
-    setTimeout(() => {
-        if (!gameActive) return;
-        hiWindow.classList.remove('hidden');
-        hiWindow.style.left = Math.random() * (window.innerWidth - 340) + 'px';
-        hiWindow.style.top = Math.random() * (window.innerHeight - 300) + 'px';
-        
-        // Start ticking down the 8 seconds
-        hiTimer = setInterval(tickHi, 1000);
-    }, 3000);
+function spawnHiWindow() {
+    if (!gameActive) return;
+    
+    // Reset internal counting variables
+    hiSeconds = 0;
+    hiSprite.src = 'assets/hi_normal.png';
+    
+    // Reveal window and position at a random desktop spot
+    hiWindow.classList.remove('hidden');
+    hiWindow.style.left = Math.random() * (window.innerWidth - 340) + 'px';
+    hiWindow.style.top = Math.random() * (window.innerHeight - 300) + 'px';
+    
+    // Start ticking down the 8 seconds
+    clearInterval(hiTimer);
+    hiTimer = setInterval(tickHi, 1000);
 }
 
 function tickHi() {
@@ -86,9 +97,11 @@ function resetHiCycle() {
     clearInterval(hiTimer);
     hiSeconds = 0;
     hiSprite.src = 'assets/hi_normal.png';
+    
     if (gameActive) {
-        // Queue up the next random spawn encounter
-        startHiLoop();
+        // After closing, queue up a new spawn encounter between 3 to 6 seconds out
+        const randomDelay = Math.random() * 3000 + 3000;
+        initialSpawnTimeout = setTimeout(spawnHiWindow, randomDelay);
     }
 }
 
@@ -103,9 +116,10 @@ function stopHiLoop() {
 function triggerComputerCrash() {
     gameActive = false;
     stopHiLoop();
+    clearTimeout(initialSpawnTimeout);
     
     // Play crash track from sounds folder
-    endSound.play().catch(e => console.log("Audio failed to auto-play: requires user interaction first."));
+    endSound.play().catch(e => console.log("Audio failed to play: requires user window click interaction first."));
     
     // Unhide the crash interface over the whole screen
     crashScreen.classList.remove('hidden');
