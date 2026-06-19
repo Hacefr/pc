@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro OS Test</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <!-- The Desktop Screen -->
+    <div id="desktop">
+        
+        <!-- Game Icon -->
+        <div id="game-icon" class="desktop-icon">
+            <div id="placeholder-logo">📄</div>
+            <span>game.exe</span>
+        </div>
+
+        <!-- The App Window (Hidden by default) -->
+        <div id="app-window" class="window hidden">
+            <div id="window-header" class="window-header">
+                <span class="window-title">game.exe</span>
+                <button id="close-btn" class="close-button">X</button>
+            </div>
+            <div class="window-content">
+                <h3>Welcome to game.exe</h3>
+                <p>Drag me by my header bar!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Main Game Script -->
+    <script src="main.js"></script>
+</body>
+</html>
