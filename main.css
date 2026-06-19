@@ -28,9 +28,18 @@ body, html {
     user-select: none;
 }
 
-#placeholder-logo {
-    font-size: 40px;
+/* Custom Pixel Art Logo Formatting */
+#desktop-logo {
+    width: 48px;
+    height: 48px;
     margin-bottom: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Keeps your pixel art sharp and crisp on all screen resolutions */
+    image-rendering: pixelated; 
+    image-rendering: crisp-edges;
 }
 
 /* Retro Window Style */
