@@ -13,6 +13,7 @@ body, html {
     width: 100%;
     height: 100%;
     position: relative;
+    z-index: 1;
 }
 
 /* Desktop Icon Style */
@@ -36,8 +37,6 @@ body, html {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    
-    /* Keeps your pixel art sharp and crisp on all screen resolutions */
     image-rendering: pixelated; 
     image-rendering: crisp-edges;
 }
@@ -45,10 +44,7 @@ body, html {
 /* Retro Window Style */
 .window {
     position: absolute;
-    top: 100px;
-    left: 100px;
-    width: 300px;
-    height: 200px;
+    width: 320px;
     background-color: #c0c0c0;
     border: 3px solid;
     border-color: #fff #808080 #808080 #fff;
@@ -62,7 +58,7 @@ body, html {
     display: none;
 }
 
-/* Window Header Bar (The draggable zone) */
+/* Window Header Bar */
 .window-header {
     background-color: #000080; /* Classic dark blue header */
     color: white;
@@ -73,6 +69,11 @@ body, html {
     cursor: move;
     user-select: none;
     font-weight: bold;
+}
+
+/* Red style header change for Hi window */
+.hi-header-color {
+    background-color: #800000;
 }
 
 /* Retro Close Button */
@@ -97,4 +98,46 @@ body, html {
 .window-content {
     padding: 15px;
     color: black;
+}
+
+/* Hi Layout inside the pop-up */
+.hi-content-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#hi-sprite {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* Blue Screen Crash Display */
+#crash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000aa; /* Blue screen of death color */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    box-sizing: border-box;
+    z-index: 9999; /* Always on top of everything */
+}
+
+#crash-screen.hidden {
+    display: none;
+}
+
+#crash-text {
+    max-width: 600px;
+    text-align: left;
 }
